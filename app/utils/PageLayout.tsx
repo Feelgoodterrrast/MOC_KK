@@ -1,29 +1,34 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { ReactNode } from "react";
-import Navbar from "../components/Navbar";
+import NavigationBar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { SessionProvider } from "next-auth/react";
 
 export default function PageLayout({ children }: { children: ReactNode }) {
+  const { data: session } = useSession();
   const pathname = usePathname();
-  const isHomePage = pathname === "/home";
+  const isHomePage = pathname === "/home" || pathname === "/";
 
-  return (
-    <SessionProvider>
-      <div className={isHomePage ? "bg-[#F4F8F3]" : ""}>
-        <Navbar />
-
+  if (!session) {
+    return (
+      <div className={`flex flex-col min-h-screen`}>
+        <NavigationBar />
         <div
-          className={`flex flex-col custom-min-h mx-auto ${
-            !isHomePage ? "lg:pt-28 pt-24" : ""
-          }`}
+          className={`flex-1 overflow-y-auto
+        ${isHomePage ? "" : "pt-24"}
+      `}
         >
-          <div>{children}</div>
+          {children}
         </div>
         <Footer />
       </div>
-    </SessionProvider>
+    );
+  }
+  return (
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-1 overflow-y-auto">{children}</div>
+    </div>
   );
 }
