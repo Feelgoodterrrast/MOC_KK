@@ -5,10 +5,12 @@ import { useSession, signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import home_bg from "@/public/images/home_bg.png";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { data: session } = useSession();
   const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsMounted(true);
@@ -16,16 +18,16 @@ export default function Home() {
 
   useEffect(() => {
     if (isMounted && session) {
-      window.location.href = "/dashboard";
+      router.push("/dashboard"); // Redirect to dashboard
     }
-  }, [isMounted, session]);
+  }, [isMounted, session, router]);
 
   if (!isMounted) {
-    return null;
+    return null; // Avoid rendering until the component is fully mounted
   }
 
-  return (
-    <>
+  if (!session) {
+    return (
       <div className="relative flex flex-col min-h-screen items-center justify-center text-white">
         <Image
           src={home_bg}
@@ -46,6 +48,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
-  );
+    );
+  }
+
+  return null;
 }
