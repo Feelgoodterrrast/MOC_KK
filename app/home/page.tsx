@@ -39,8 +39,8 @@ export default function Home() {
           className="-z-10"
         />
         <div className="text-center">
-          <h1 className="text-2xl font-semibold">ยินดีต้อนรับสู่ระบบ</h1>
-          <h1 className="lg:text-4xl text-primary">MOC KHONKAEN</h1>
+          <h1 className="text-2xl">ยินดีต้อนรับสู่ระบบ</h1>
+          <h1 className="lg:text-4xl text-primary font-semibold">MOC KHONKAEN</h1>
           <div className="w-full flex justify-center mt-4">
             <Button onClick={() => signIn()} className="px-4">
               เข้าสู่ระบบ

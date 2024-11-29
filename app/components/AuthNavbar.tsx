@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button, Navbar } from "flowbite-react";
+import { Navbar } from "flowbite-react";
 import Logo from "@/public/images/moc_logo.png";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
@@ -12,7 +12,7 @@ export default function AuthNavbar() {
   // console.log('session', session)
 
   return (
-    <Navbar fluid rounded className={`fixed top-0 left-0 w-full z-50`}>
+    <Navbar fluid rounded className={`fixed top-0 left-0 w-full z-50 md:shadow-sm shadow-lg`}>
       <Navbar.Brand as={Link} href="/home">
         <Image
           src={Logo}
@@ -28,9 +28,16 @@ export default function AuthNavbar() {
         </span>
       </Navbar.Brand>
       <Navbar.Toggle />
-      <Navbar.Collapse>
-        <Navbar.Link className="cursor-text">{session?.user?.email}</Navbar.Link>
-        <Navbar.Link onClick={() => signOut()} className="cursor-pointer">ออกจากระบบ</Navbar.Link>
+      <Navbar.Collapse className="md:leading-normal leading-10">
+        <Navbar.Link className="cursor-default">
+          {session?.user?.email}
+        </Navbar.Link>
+        <Navbar.Link
+          onClick={() => signOut()}
+          className="cursor-pointer text-red-500 hover:text-red-600 transition-all"
+        >
+          ออกจากระบบ
+        </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );
