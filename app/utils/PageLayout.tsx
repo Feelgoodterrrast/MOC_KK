@@ -2,7 +2,8 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { ReactNode, useEffect } from "react";
+import { Spinner } from "flowbite-react";
+import { ReactNode, useEffect, useState } from "react";
 import NavigationBar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AuthLayout from "./AuthLayout";
@@ -11,28 +12,50 @@ export default function PageLayout({ children }: { children: ReactNode }) {
   const { data: session, status } = useSession();
   const pathname = usePathname();
   const router = useRouter();
-  const isHomePage = pathname === "/home" || pathname === "/";
 
+  const [isSlowConnection, setIsSlowConnection] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Detect connection speed
+  useEffect(() => {
+    const connection = navigator.connection || navigator.webkitConnection || navigator.mozConnection;
+    if (connection) {
+      const slowConnectionTypes = ["slow-2g", "2g"];
+      setIsSlowConnection(slowConnectionTypes.includes(connection.effectiveType));
+    }
+  }, []);
+
+  // Handle routing and loading
   useEffect(() => {
     if (status === "authenticated" && pathname !== "/dashboard") {
+      setIsLoading(true);
       router.push("/dashboard");
-    } else if (status === "unauthenticated" && !isHomePage) {
+    } else if (status === "unauthenticated" && pathname !== "/home") {
+      setIsLoading(true);
       router.push("/home");
+    } else {
+      setIsLoading(false);
     }
-  }, [status, pathname, router, isHomePage]);
+  }, [status, pathname, router]);
 
-  if (status === "loading") {
-    return null; // Optionally, render a loading state while checking session
+  // Show spinner for slow connections or during loading
+  if (isLoading || isSlowConnection) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-opacity-5">
+        <Spinner size="lg" aria-label="Loading..." />
+      </div>
+    );
   }
 
+  // Layout for unauthenticated users
   if (!session) {
     return (
-      <div className={`flex flex-col min-h-screen`}>
+      <div className="flex flex-col min-h-screen">
         <NavigationBar />
         <div
-          className={`flex-1 overflow-y-auto
-        ${isHomePage ? "" : "pt-24"}
-      `}
+          className={`flex-1 overflow-y-auto ${
+            pathname === "/home" || pathname === "/" ? "" : "pt-24"
+          }`}
         >
           {children}
         </div>
@@ -41,5 +64,6 @@ export default function PageLayout({ children }: { children: ReactNode }) {
     );
   }
 
+  // Layout for authenticated users
   return <AuthLayout>{children}</AuthLayout>;
 }
