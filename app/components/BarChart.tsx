@@ -1,44 +1,34 @@
-import React, { Component } from "react";
-import Chart from "react-apexcharts";
+"use client";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+import dynamic from "next/dynamic";
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-    this.state = {
-      options: {
-        chart: {
-          id: "basic-bar"
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-        }
-      },
-      series: [
-        {
-          name: "series-1",
-          data: [30, 40, 45, 50, 49, 60, 70, 91]
-        }
-      ]
-    };
-  }
+export function BarChart() {
+  const option = {
+    chart: {
+      id: "apexchart-example",
+    },
+    xaxis: {
+      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+    },
+  };
 
-  render() {
-    return (
-      <div className="app">
-        <div className="row">
-          <div className="mixed-chart">
-            <Chart
-              options={this.state.options}
-              series={this.state.series}
-              type="bar"
-              width="500"
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const series = [
+    {
+      name: "series-1",
+      data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
+    },
+  ];
+
+  return (
+    <>
+      <ApexChart
+        type="line"
+        options={option}
+        series={series}
+        height={500}
+        width="100%"
+      />
+    </>
+  );
 }
-
-export default App;

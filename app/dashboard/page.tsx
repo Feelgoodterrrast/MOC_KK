@@ -2,11 +2,12 @@
 
 import { Card } from "flowbite-react";
 import { HiShoppingCart, HiNewspaper, HiUser } from "react-icons/hi";
+import { BarChart } from "../components/BarChart";
 
 export default function Dashboard() {
   return (
     <div>
-      <div className="grid lg:grid-cols-3 md:grid-cols-1 grid-cols-1 gap-4">
+      <div className="grid lg:grid-cols-3 md:grid-cols-1 grid-cols-1 gap-4 mb-4">
         <div>
           <Card className="max-w-full min-h-40 relative shadow-sm-light rounded-2xl">
             <p className="font-normal text-gray-700 dark:text-gray-400">
@@ -38,7 +39,7 @@ export default function Dashboard() {
           </Card>
         </div>
         <div>
-        <Card className="max-w-full min-h-40 relative shadow-sm-light rounded-2xl">
+          <Card className="max-w-full min-h-40 relative shadow-sm-light rounded-2xl">
             <p className="font-normal text-gray-700 dark:text-gray-400">
               รายการผู้ใช้งานในระบบทั้งหมด
             </p>
@@ -50,6 +51,13 @@ export default function Dashboard() {
             <h5 className="text-6xl font-bold tracking-tight text-gray-900 dark:text-white absolute bottom-4">
               7
             </h5>
+          </Card>
+        </div>
+      </div>
+      <div className="grid lg:grid-cols-2 md:grid-cols-1 grid-cols-1 gap-4 mb-4">
+        <div>
+          <Card className="max-w-full min-h-40 relative shadow-sm-light rounded-2xl">
+            <BarChart />
           </Card>
         </div>
       </div>
