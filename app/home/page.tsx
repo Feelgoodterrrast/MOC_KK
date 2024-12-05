@@ -18,7 +18,7 @@ export default function Home() {
 
   useEffect(() => {
     if (isMounted && session) {
-      router.push("/dashboard"); // Redirect to dashboard
+      router.push("/dashboard");
     }
   }, [isMounted, session, router]);
 
@@ -40,7 +40,9 @@ export default function Home() {
         />
         <div className="text-center">
           <h1 className="text-2xl">ยินดีต้อนรับสู่ระบบ</h1>
-          <h1 className="lg:text-4xl text-primary font-semibold">MOC KHONKAEN</h1>
+          <h1 className="lg:text-4xl text-primary font-semibold">
+            MOC KHONKAEN
+          </h1>
           <div className="w-full flex justify-center mt-4">
             <Button onClick={() => signIn()} className="px-4">
               เข้าสู่ระบบ
