@@ -5,7 +5,7 @@ import { SidebarLinks } from "../api/mock/SidebarLink";
 
 export default function AuthSidebar() {
   return (
-    <Sidebar className={`fixed top-[60px] rounded-none z-50`}>
+    <Sidebar className={`fixed top-[60px] rounded-none z-50 border-r`}>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           {SidebarLinks.map((item, index) => (

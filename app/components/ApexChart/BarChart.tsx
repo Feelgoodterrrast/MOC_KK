@@ -7,7 +7,7 @@ const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 export function BarChart() {
   const option = {
     chart: {
-      id: "apexchart-example",
+      id: "apexchart-bar",
     },
     xaxis: {
       categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
@@ -16,6 +16,7 @@ export function BarChart() {
 
   const series = [
     {
+      type: "bar",
       name: "series-1",
       data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
     },
@@ -23,13 +24,7 @@ export function BarChart() {
 
   return (
     <>
-      <ApexChart
-        type="line"
-        options={option}
-        series={series}
-        height={500}
-        width="100%"
-      />
+      <ApexChart options={option} series={series} height={400} width="100%" />
     </>
   );
 }
