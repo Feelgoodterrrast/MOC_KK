@@ -24,7 +24,7 @@ export function BarChart() {
 
   return (
     <>
-      <ApexChart options={option} series={series} height={400} width="100%" />
+      <ApexChart options={option} series={series} height={340} width="100%" />
     </>
   );
 }

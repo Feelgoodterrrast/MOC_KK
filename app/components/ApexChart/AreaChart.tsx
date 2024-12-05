@@ -15,7 +15,7 @@ const AreaChart: React.FC<AreaChartProps> = ({ series, categories }) => {
     const options = {
       series, // Dynamic series data
       chart: {
-        height: 350,
+        height: 340,
         type: "area",
       },
       dataLabels: {

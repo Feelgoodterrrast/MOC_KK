@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from "react";
 import ApexCharts from "apexcharts";
 
 interface PieChartProps {
-  series: number[]; // Array of data for the pie chart
-  labels: string[]; // Labels for the pie chart segments
+  series: number[];
+  labels: string[]; 
 }
 
 const PieChart: React.FC<PieChartProps> = ({ series, labels }) => {
@@ -15,34 +15,19 @@ const PieChart: React.FC<PieChartProps> = ({ series, labels }) => {
     const options = {
       series,
       chart: {
-        height: 350,
         width: "100%",
         type: "pie",
       },
       labels,
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: "bottom",
-            },
-          },
-        },
-      ],
     };
   
     const chart = new ApexCharts(chartRef.current, options);
     chart.render();
   
-    // Cleanup chart instance on unmount
     return () => {
       chart.destroy();
     };
-  }, [series, labels]); // Ensure dependencies are stable
+  }, [series, labels]); 
   
 
   return <div id="chart" ref={chartRef}></div>;

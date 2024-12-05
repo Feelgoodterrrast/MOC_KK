@@ -1,7 +1,7 @@
 "use client";
 
 import { Table } from "flowbite-react";
-import { TableHead, TableBody } from "../api/mock/DataTable";
+import { TableHead, TableBody } from "../../api/mock/DataTable";
 
 export function ExampleTable() {
   return (
