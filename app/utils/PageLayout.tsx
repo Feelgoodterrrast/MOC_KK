@@ -18,12 +18,13 @@ export default function PageLayout({ children }: { children: ReactNode }) {
 
   // Detect connection speed
   useEffect(() => {
-    const connection = navigator.connection || navigator.webkitConnection || navigator.mozConnection;
-    if (connection) {
+    if (typeof navigator !== "undefined" && navigator.connection) {
+      const connection = navigator.connection;
       const slowConnectionTypes = ["slow-2g", "2g"];
       setIsSlowConnection(slowConnectionTypes.includes(connection.effectiveType));
     }
   }, []);
+  
 
   // Handle routing and loading
   useEffect(() => {
