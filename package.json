@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "apexcharts": "^4.1.0",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "flowbite-react": "^0.10.2",
     "next": "15.0.3",
     "next-auth": "^4.24.10",

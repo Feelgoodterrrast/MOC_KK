@@ -16,18 +16,17 @@ export default function PageLayout({ children }: { children: ReactNode }) {
   const [isSlowConnection, setIsSlowConnection] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Detect connection speed
   useEffect(() => {
-    const connection = navigator.connection || navigator.webkitConnection || navigator.mozConnection;
-    if (connection) {
+    if (typeof navigator !== "undefined" && navigator.connection) {
+      const connection = navigator.connection;
       const slowConnectionTypes = ["slow-2g", "2g"];
       setIsSlowConnection(slowConnectionTypes.includes(connection.effectiveType));
     }
   }, []);
+  
 
-  // Handle routing and loading
   useEffect(() => {
-    if (status === "authenticated" && pathname !== "/dashboard") {
+    if (status === "authenticated" && !pathname.startsWith("/dashboard")) {
       setIsLoading(true);
       router.push("/dashboard");
     } else if (status === "unauthenticated" && pathname !== "/home") {
@@ -37,8 +36,8 @@ export default function PageLayout({ children }: { children: ReactNode }) {
       setIsLoading(false);
     }
   }, [status, pathname, router]);
+  
 
-  // Show spinner for slow connections or during loading
   if (isLoading || isSlowConnection) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-opacity-5">
@@ -47,7 +46,6 @@ export default function PageLayout({ children }: { children: ReactNode }) {
     );
   }
 
-  // Layout for unauthenticated users
   if (!session) {
     return (
       <div className="flex flex-col min-h-screen">
@@ -64,6 +62,5 @@ export default function PageLayout({ children }: { children: ReactNode }) {
     );
   }
 
-  // Layout for authenticated users
   return <AuthLayout>{children}</AuthLayout>;
 }

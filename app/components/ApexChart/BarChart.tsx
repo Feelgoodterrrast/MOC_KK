@@ -17,7 +17,7 @@ export function BarChart() {
   const series = [
     {
       type: "bar",
-      name: "series-1",
+      name: "จำนวน",
       data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
     },
   ];
