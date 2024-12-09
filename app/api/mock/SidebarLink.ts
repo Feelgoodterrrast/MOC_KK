@@ -27,7 +27,7 @@ export const SidebarLinks: Links[] = [
   },
   {
     page: "สินค้า",
-    link: "#",
+    link: "/dashboard/product",
     icon: HiShoppingCart,
     label: "",
   },

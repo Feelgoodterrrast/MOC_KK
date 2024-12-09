@@ -11,7 +11,7 @@ import { SidebarLinks } from "../api/mock/SidebarLink";
 export default function AuthNavbar() {
   const { data: session } = useSession();
   // const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => setIsOpen(false);
 
