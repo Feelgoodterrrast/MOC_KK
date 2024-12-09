@@ -16,6 +16,7 @@ const PieChart: React.FC<PieChartProps> = ({ series, labels }) => {
       series,
       chart: {
         width: "100%",
+        height: "350px",
         type: "pie",
       },
       labels,

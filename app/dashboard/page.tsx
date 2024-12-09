@@ -3,18 +3,18 @@
 import { BarChart } from "../components/ApexChart/BarChart";
 import AreaChart from "../components/ApexChart/AreaChart";
 import PieChart from "../components/ApexChart/PieChart";
-import { ExampleTable } from "../components/DataTable/ExampleTable";
+// import { ExampleTable } from "../components/DataTable/ExampleTable";
 import { ActivityTable } from "../components/DataTable/ActivityLogTable";
 import { Card } from "flowbite-react";
 
 export default function Dashboard() {
   const seriesArea = [
     {
-      name: "series1",
+      name: "ในประเทศ",
       data: [31, 40, 28, 51, 42, 109, 100],
     },
     {
-      name: "series2",
+      name: "ต่างประเทศ",
       data: [11, 32, 45, 32, 34, 52, 41],
     },
   ];
@@ -30,7 +30,7 @@ export default function Dashboard() {
   ];
 
   const seriesPie = [44, 55, 13, 43, 22];
-  const labelsPie = ["Team A", "Team B", "Team C", "Team D", "Team E"];
+  const labelsPie = ["ข่าวทั่วไป", "กิจกรรม", "แคมเปญ", "เรื่องน่ารู้", "ข่าวภายใน"];
 
   return (
     <div>
@@ -75,25 +75,25 @@ export default function Dashboard() {
       </section>
 
       <section className="overview mb-12">
-        <div className="grid lg:grid-cols-3 md:grid-cols-1 grid-cols-1 gap-4 mb-4">
-          <div>
+        <div className="grid lg:grid-cols-5 md:grid-cols-1 grid-cols-1 gap-4 mb-4">
+          <div className="lg:col-span-3">
             <h1 className="text-2xl font-bold mb-2">การโพสต์ข่าวสาร</h1>
             <Card className="shadow-none rounded-xl">
               <PieChart series={seriesPie} labels={labelsPie} />
             </Card>
           </div>
-          <div>
+          <div className="lg:col-span-2">
             <h1 className="text-2xl font-bold mb-2">การค้าในและต่างประเทศ</h1>
             <Card className="shadow-none rounded-xl">
               <AreaChart series={seriesArea} categories={categoriesArea} />
             </Card>
           </div>
-          <div>
+          {/* <div>
             <h1 className="text-2xl font-bold mb-2">รายการสินค้า</h1>
             <div className="flex-grow">
               <ExampleTable />
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 

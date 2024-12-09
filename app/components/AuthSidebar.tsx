@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import { Sidebar } from "flowbite-react";
@@ -12,7 +12,7 @@ export default function AuthSidebar() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 h-full z-50 bg-white border-r">
+    <div className="h-full z-50 bg-white border-r">
       <Sidebar className="fixed top-[60px] rounded-none z-50 border-r bg-white">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
@@ -22,7 +22,9 @@ export default function AuthSidebar() {
                 icon={item.icon}
                 label={item.label}
                 key={index}
-                active={currentPath === item.link}
+                className={`${
+                  currentPath === item.link ? "bg-blue-100 text-blue-600 font-bold" : ""
+                }`}
               >
                 {item.page}
               </Sidebar.Item>
