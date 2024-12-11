@@ -12,6 +12,7 @@ import {
 } from "@/app/api/mock/productService";
 import Link from "next/link";
 import { HiOutlineArrowSmLeft } from "react-icons/hi";
+import Swal from "sweetalert2";
 
 const ProductManage = () => {
   const params = useParams();
@@ -72,18 +73,42 @@ const ProductManage = () => {
         title: productDetail.title,
         price: productDetail.price,
       });
-      
+
       updatedProduct.meta = {
         ...updatedProduct.meta,
-        updatedAt: new Date().toISOString(), 
+        updatedAt: new Date().toISOString(),
       };
 
-      setProductDetail(updatedProduct);
-      
-      setUpdateSuccess("Product updated successfully!");
+      const result = await Swal.fire({
+        title: "คุณต้องการอัปเดตข้อมูลนี้หรือไม่ ?",
+        text: "กรุณาตรวจสอบข้อมูลก่อนการอัปเดตทุกครั้ง.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "ยืนยัน",
+        cancelButtonText: "ยกเลิก",
+      });
+
+      if (result.isConfirmed) {
+        await setProductDetail(updatedProduct);
+
+        await Swal.fire({
+          title: "อัปเดตข้อมูลสำเร็จ",
+          text: "ข้อมูลดังกล่าวถูกอัปเดตแล้ว",
+          icon: "success",
+          confirmButtonColor: "#3085d6",
+        });
+      }
     } catch (error) {
       console.error(error);
-      setUpdateError("Failed to update product. Please try again.");
+
+      await Swal.fire({
+        title: "ไม่สามารถดำเนินการได้",
+        text: "ขออภัย ในขณะนี้ระบบไม่สามารถดำเนินการได้ กรุณาลองใหม่อีกครั้ง",
+        icon: "error",
+        confirmButtonColor: "#d33",
+      });
     } finally {
       setUpdating(false);
     }
