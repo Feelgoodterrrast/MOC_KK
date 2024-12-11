@@ -133,7 +133,7 @@ const ProductTable: React.FC = () => {
         <>
           <Table.HeadCell
             onClick={() => handleSort("id", "number")}
-            className="cursor-pointer"
+            className="cursor-pointer flex gap-2"
           >
             <span className="flex gap-2">
               <HiSwitchVertical fontSize={16} />
@@ -143,7 +143,7 @@ const ProductTable: React.FC = () => {
           <Table.HeadCell>รูปภาพ</Table.HeadCell>
           <Table.HeadCell
             onClick={() => handleSort("title", "string")}
-            className="cursor-pointer"
+            className="cursor-pointer gap-2"
           >
             <span className="flex gap-2">
               <HiSwitchVertical fontSize={16} />
@@ -152,7 +152,7 @@ const ProductTable: React.FC = () => {
           </Table.HeadCell>
           <Table.HeadCell
             onClick={() => handleSort("category", "string")}
-            className="cursor-pointer"
+            className="cursor-pointer gap-2"
           >
             <span className="flex gap-2">
               <HiSwitchVertical fontSize={16} />
@@ -161,7 +161,7 @@ const ProductTable: React.FC = () => {
           </Table.HeadCell>
           <Table.HeadCell
             onClick={() => handleSort("price", "number")}
-            className="cursor-pointer"
+            className="cursor-pointer gap-2"
           >
             <span className="flex gap-2">
               <HiSwitchVertical fontSize={16} />
