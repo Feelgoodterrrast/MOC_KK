@@ -123,3 +123,22 @@ export const deleteProduct = async (id: string): Promise<void> => {
     throw error;
   }
 };
+
+// COUNT product
+export const countProduct = async () => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/products`
+    );
+
+    if (Array.isArray(response.data.products)) {
+      return response.data.products.length;
+    } else {
+      throw new Error("Unexpected response format");
+    }
+
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  }
+};

@@ -7,27 +7,12 @@ import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
 import { SidebarLinks } from "../api/mock/SidebarLink";
+import { HiMenuAlt2, HiMenuAlt3 } from "react-icons/hi";
 
 export default function AuthNavbar() {
   const { data: session } = useSession();
-  // const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
   const handleClose = () => setIsOpen(false);
-
-  // const checkScreenSize = () => {
-  //   const mediaQuery = window.matchMedia("(max-width: 1024px)");
-  //   setIsSmallScreen(mediaQuery.matches);
-  // };
-
-  // useEffect(() => {
-  //   checkScreenSize();
-  //   const resizeListener = () => checkScreenSize();
-  //   window.addEventListener("resize", resizeListener);
-
-  //   return () => window.removeEventListener("resize", resizeListener);
-  // }, []);
-
   return (
     <>
       <Drawer open={isOpen} onClose={handleClose} className="z-50 border-r ">
@@ -69,12 +54,18 @@ export default function AuthNavbar() {
             <br />
             จังหวัดขอนแก่น
           </span>
+          <button
+            className="lg:hidden md:flex hidden pl-6 text-gray-500 hover:text-gray-700 focus:outline-none"
+            onClick={() => setIsOpen(true)}
+          >
+            <HiMenuAlt2 size={20} />
+          </button>
         </Navbar.Brand>
         <button
-          className="lg:hidden pl-10 text-gray-500 hover:text-gray-700 focus:outline-none mr-4"
+          className="lg:hidden md:hidden flex pl-6 text-gray-500 hover:text-gray-700 focus:outline-none"
           onClick={() => setIsOpen(true)}
         >
-          ☰
+          <HiMenuAlt3 size={20} />
         </button>
         <Navbar.Collapse>
           <Navbar.Link className="cursor-default md:flex hidden list-none">

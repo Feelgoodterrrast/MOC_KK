@@ -33,7 +33,7 @@ export const SidebarLinks: Links[] = [
   },
   {
     page: "ข่าวสาร",
-    link: "/dashboard/news",
+    link: "/dashboard/post",
     icon: HiSpeakerphone,
     label: "",
   },

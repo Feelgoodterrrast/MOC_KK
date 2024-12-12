@@ -4,7 +4,7 @@ export type Post = {
   id: number;
   title: string;
   body: string;
-  tags: [];
+  tags: string[];
   reactions: {
     likes: number;
     dislikes: number
@@ -90,6 +90,25 @@ export const deletePost = async (id: string): Promise<void> => {
     await axios.delete(`${process.env.NEXT_PUBLIC_API_BASE_URL}/post/${id}`);
   } catch (error) {
     console.error(`Error deleting post with ID ${id}:`, error);
+    throw error;
+  }
+};
+
+// COUNT post
+export const countPost = async () => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/posts`
+    );
+
+    if (Array.isArray(response.data.posts)) {
+      return response.data.posts.length;
+    } else {
+      throw new Error("Unexpected response format");
+    }
+
+  } catch (error) {
+    console.error("Error fetching posts:", error);
     throw error;
   }
 };

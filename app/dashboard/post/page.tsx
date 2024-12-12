@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Spinner, Table } from "flowbite-react";
-import { fetchPosts, deletePost, Post } from "@/app/api/mock/newsService";
+import { fetchPosts, deletePost, Post } from "@/app/api/mock/postService";
 import DataTable from "@/app/components/DataTable/DataTable";
 import { HiSwitchVertical } from "react-icons/hi";
 import Link from "next/link";

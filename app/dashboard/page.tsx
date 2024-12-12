@@ -1,13 +1,19 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { BarChart } from "../components/ApexChart/BarChart";
 import AreaChart from "../components/ApexChart/AreaChart";
 import PieChart from "../components/ApexChart/PieChart";
-// import { ExampleTable } from "../components/DataTable/ExampleTable";
 import { ActivityTable } from "../components/DataTable/ActivityLogTable";
+import { countProduct } from "../api/mock/productService";
+import { countPost } from "../api/mock/postService";
+import { countUser } from "../api/mock/userSetvice";
 import { Card } from "flowbite-react";
 
 export default function Dashboard() {
+  const [countProducts, setCountProducts] = useState(0);
+  const [countPosts, setCountPosts] = useState(0);
+  const [countUsers, setCountUsers] = useState(0);
   const seriesArea = [
     {
       name: "ในประเทศ",
@@ -30,7 +36,46 @@ export default function Dashboard() {
   ];
 
   const seriesPie = [44, 55, 13, 43, 22];
-  const labelsPie = ["ข่าวทั่วไป", "กิจกรรม", "แคมเปญ", "เรื่องน่ารู้", "ข่าวภายใน"];
+  const labelsPie = [
+    "ข่าวทั่วไป",
+    "กิจกรรม",
+    "แคมเปญ",
+    "เรื่องน่ารู้",
+    "ข่าวภายใน",
+  ];
+
+  useEffect(() => {
+    const getCountProduct = async () => {
+      try {
+        const data = await countProduct();
+        setCountProducts(data);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+
+    const getCountPost = async () => {
+      try {
+        const data = await countPost();
+        setCountPosts(data);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+
+    const getCountUser = async () => {
+      try {
+        const data = await countUser();
+        setCountUsers(data);
+      } catch (err) {
+        console.log("err", err);
+      }
+    };
+
+    getCountUser()
+    getCountProduct();
+    getCountPost();
+  });
 
   return (
     <div>
@@ -50,7 +95,7 @@ export default function Dashboard() {
             </p>
 
             <h5 className="text-5xl font-bold tracking-tight text-cyan-700">
-              25
+              {countProducts !== null ? countProducts : "Loading..."}
             </h5>
           </div>
           <div className="pl-6">
@@ -59,7 +104,7 @@ export default function Dashboard() {
             </p>
 
             <h5 className="text-5xl font-bold tracking-tight text-purple-700">
-              10
+            {countPosts !== null ? countPosts : "Loading..."}
             </h5>
           </div>
           <div className="pl-6">
@@ -68,7 +113,7 @@ export default function Dashboard() {
             </p>
 
             <h5 className="text-5xl font-bold tracking-tight text-indigo-700">
-              7
+            {countUsers !== null ? countUsers : "Loading..."}
             </h5>
           </div>
         </div>
@@ -88,12 +133,6 @@ export default function Dashboard() {
               <AreaChart series={seriesArea} categories={categoriesArea} />
             </Card>
           </div>
-          {/* <div>
-            <h1 className="text-2xl font-bold mb-2">รายการสินค้า</h1>
-            <div className="flex-grow">
-              <ExampleTable />
-            </div>
-          </div> */}
         </div>
       </section>
 
